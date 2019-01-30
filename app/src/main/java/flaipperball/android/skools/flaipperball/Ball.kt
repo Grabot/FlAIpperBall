@@ -10,13 +10,11 @@ class Ball(val mass: Double, val radius: Float, var velocity: Vec2, var pos: Poi
         val x = width / 2 + pos.x.toFloat() / 1000 * tileSize
         val y = height / 2 + pos.y.toFloat() / 1000 * tileSize
         canvas.drawCircle(x, y, radius / 1000 * tileSize, paint)
-
-//        canvas.drawCircle(coords.x.toFloat(), coords.y.toFloat(), radius, paint);
     }
 
     fun applyForces() {
         gravityForce()
-        frictionForce(0.99)
+        frictionForce(0.999)
     }
 
     fun gravityForce() {
@@ -27,7 +25,7 @@ class Ball(val mass: Double, val radius: Float, var velocity: Vec2, var pos: Poi
         pos += velocity
 
         // This should be removed with actual collision detecting
-        if (pos.y > 25000) {
+        if (pos.y > 14000) {
             velocity *= -1.0
         }
     }
