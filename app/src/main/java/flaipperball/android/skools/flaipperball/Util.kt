@@ -5,7 +5,7 @@ fun point(x: Double, y: Double): Point {
     return Point(x, y)
 }
 
-data class Point(val x: Double, val y: Double) {
+data class Point(var x: Double, var y: Double) {
 
     fun distanceTo(p: Point): Double {
         return Math.sqrt(Math.pow((x - p.x), 2.0) + Math.pow((y - p.y), 2.0))
@@ -58,4 +58,21 @@ data class Vec2(val p: Point) {
     operator fun times(a: Double): Vec2 {
         return Vec2(p * a)
     }
+}
+
+fun rotateAPoint(point: Point, center: Point, degree: Double): Point {
+    val angle = Math.toRadians(degree)
+
+    // difference
+    var x1 = point.x - center.x
+    var y1 = point.y - center.y
+
+    // rotation
+    x1 = x1 * Math.cos(angle) - y1 * Math.sin(angle)
+    y1 = x1 * Math.sin(angle) + y1 * Math.cos(angle)
+
+    val newX = x1 + center.x
+    val newY = y1 + center.y
+
+    return point(newX, newY)
 }

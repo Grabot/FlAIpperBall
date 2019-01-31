@@ -45,19 +45,38 @@ class GameView(context : Context) : View(context){
         //simple box which would be the playground
 
         val flipLeftPoints = arrayOf(
-            point(-8000.0, 13000.0),
-            point(-3000.0, 14000.0),
-            point(-4000.0, 15000.0),
-            point(-9000.0, 14500.0)
+            point(-2400.0, 0.0),
+            point(-2250.0, 450.0),
+            point(-1950.0, 600.0),
+            point(1200.0, 450.0),
+            point(2400.0, 300.0),
+            point(2700.0, 150.0),
+            point(2700.0, -150.0),
+            point(2400.0, -300.0),
+            point(1200.0, -450.0),
+            point(-1950.0, -600.0),
+            point(-2250.0, -450.0)
         )
-        flipLeft = Flip(flipLeftPoints, paint)
+        flipLeft = Flip(point(0.0, 0.0), 0.0f, flipLeftPoints, paint)
         val flipRightPoints = arrayOf(
-            point(8000.0, 13000.0),
-            point(3000.0, 14000.0),
-            point(4000.0, 15000.0),
-            point(9000.0, 14500.0)
+            point(2400.0, 0.0),
+            point(2250.0, 450.0),
+            point(1950.0, 600.0),
+            point(-1200.0, 450.0),
+            point(-2400.0, 300.0),
+            point(-2700.0, 150.0),
+            point(-2700.0, -150.0),
+            point(-2400.0, -300.0),
+            point(-1200.0, -450.0),
+            point(1950.0, -600.0),
+            point(2250.0, -450.0)
         )
-        flipRight = Flip(flipRightPoints, paint)
+        flipRight = Flip(point(0.0, 0.0), 0.0f, flipRightPoints, paint)
+
+        // Created the flippers correctly, now move them to the correct spot. We can do this immediately, but also like this.
+        flipLeft.translate(point(-3200.0, 13000.0))
+        flipRight.translate(point(3200.0, 13000.0))
+
     }
 
     override fun draw(canvas: Canvas) {
@@ -83,6 +102,9 @@ class GameView(context : Context) : View(context){
     fun applyForces() {
         // Here we define, for instance, gravity affecting the playing field.
         ball.applyForces()
+//        flipLeft.rotate(1.0)
+        flipLeft.rotate(-1.0, point(-2000.0, 0.0))
+        flipRight.rotate(-1.0, point(2000.0, 0.0))
     }
 
     override fun onTouchEvent(event: MotionEvent?): Boolean {
