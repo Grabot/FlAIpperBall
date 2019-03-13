@@ -34,15 +34,9 @@ class GameView(context : Context) : View(context){
         gridPaint.strokeWidth = resources.displayMetrics.density * 2
         gridPaint.style = Paint.Style.STROKE
 
-        ball = Ball(1.0, 1000.0f, vector(0.0, 0.0), point(0.0, 0.0), 9.81f, paint)
-        val tablePoints = arrayOf(
-            point(-10000.0, -14000.0),
-            point(10000.0, -14000.0),
-            point(10000.0, 14000.0),
-            point(-10000.0, 14000.0)
-        )
-        table = Table(tablePoints, gridPaint)
-        //simple box which would be the playground
+        ball = Ball(1.0, 1000.0f, vector(0.0, 0.0), point(0.0, 0.0), -9.81f, paint)
+
+        table = Table(gridPaint)
 
         val flipLeftPoints = arrayOf(
             point(-2400.0, 0.0),
@@ -74,8 +68,8 @@ class GameView(context : Context) : View(context){
         flipRight = Flip(point(0.0, 0.0), 0.0f, flipRightPoints, paint)
 
         // Created the flippers correctly, now move them to the correct spot. We can do this immediately, but also like this.
-        flipLeft.translate(point(-3200.0, 13000.0))
-        flipRight.translate(point(3200.0, 13000.0))
+        flipLeft.translate(point(-3200.0, -13000.0))
+        flipRight.translate(point(3200.0, -13000.0))
 
     }
 
@@ -102,9 +96,10 @@ class GameView(context : Context) : View(context){
     fun applyForces() {
         // Here we define, for instance, gravity affecting the playing field.
         ball.applyForces()
-//        flipLeft.rotate(1.0)
-        flipLeft.rotate(-1.0, point(-2000.0, 0.0))
-        flipRight.rotate(-1.0, point(2000.0, 0.0))
+
+        // example of how to rotate.
+//        flipLeft.rotate(-1.0, point(-2000.0, 0.0))
+//        flipRight.rotate(-1.0, point(2000.0, 0.0))
     }
 
     override fun onTouchEvent(event: MotionEvent?): Boolean {
